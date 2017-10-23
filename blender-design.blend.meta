@@ -1,0 +1,196 @@
+fileFormatVersion: 2
+guid: 49d6be15e193dd44694f50c09ffa1717
+timeCreated: 1508716354
+licenseType: Free
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: Cube_000
+    100002: Cube_001
+    100004: Cube_002
+    100006: Cube_003
+    100008: Cube_004
+    100010: Cube_005
+    100012: Cube_006
+    100014: Cube_007
+    100016: Cube_008
+    100018: Cylinder
+    100020: Cylinder_001
+    100022: Cylinder_002
+    100024: Cylinder_003
+    100026: Cylinder_004
+    100028: Cylinder_005
+    100030: Cylinder_006
+    100032: GUNBODY
+    100034: GUNBODY_001
+    100036: GUNBODY_002
+    100038: //RootNode
+    100040: revolver
+    100042: revolver_001
+    100044: revolver_002
+    400000: Cube_000
+    400002: Cube_001
+    400004: Cube_002
+    400006: Cube_003
+    400008: Cube_004
+    400010: Cube_005
+    400012: Cube_006
+    400014: Cube_007
+    400016: Cube_008
+    400018: Cylinder
+    400020: Cylinder_001
+    400022: Cylinder_002
+    400024: Cylinder_003
+    400026: Cylinder_004
+    400028: Cylinder_005
+    400030: Cylinder_006
+    400032: GUNBODY
+    400034: GUNBODY_001
+    400036: GUNBODY_002
+    400038: //RootNode
+    400040: revolver
+    400042: revolver_001
+    400044: revolver_002
+    2300000: Cube_000
+    2300002: Cube_001
+    2300004: Cube_002
+    2300006: Cube_003
+    2300008: Cube_004
+    2300010: Cube_005
+    2300012: Cube_006
+    2300014: Cube_007
+    2300016: Cube_008
+    2300018: Cylinder
+    2300020: Cylinder_001
+    2300022: Cylinder_002
+    2300024: Cylinder_003
+    2300026: Cylinder_004
+    2300028: Cylinder_005
+    2300030: Cylinder_006
+    2300032: GUNBODY
+    2300034: GUNBODY_001
+    2300036: GUNBODY_002
+    2300038: revolver
+    2300040: revolver_001
+    2300042: revolver_002
+    3300000: Cube_000
+    3300002: Cube_001
+    3300004: Cube_002
+    3300006: Cube_003
+    3300008: Cube_004
+    3300010: Cube_005
+    3300012: Cube_006
+    3300014: Cube_007
+    3300016: Cube_008
+    3300018: Cylinder
+    3300020: Cylinder_001
+    3300022: Cylinder_002
+    3300024: Cylinder_003
+    3300026: Cylinder_004
+    3300028: Cylinder_005
+    3300030: Cylinder_006
+    3300032: GUNBODY
+    3300034: GUNBODY_001
+    3300036: GUNBODY_002
+    3300038: revolver
+    3300040: revolver_001
+    3300042: revolver_002
+    4300000: revolver
+    4300002: Cube_003
+    4300004: Cube_002
+    4300006: Cube_001
+    4300008: Cylinder_001
+    4300010: GUNBODY
+    4300012: Cylinder
+    4300014: Cylinder_002
+    4300016: Cube_005
+    4300018: Cube_004
+    4300020: Cube_000
+    4300022: Cylinder_005
+    4300024: Cylinder_004
+    4300026: GUNBODY_001
+    4300028: revolver_001
+    4300030: Cube_006
+    4300032: revolver_002
+    4300034: Cube_007
+    4300036: Cylinder_003
+    4300038: GUNBODY_002
+    4300040: Cube_008
+    4300042: Cylinder_006
+    7400000: Default Take
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

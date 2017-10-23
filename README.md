@@ -1,1 +1,1 @@
-Not much here yet!
+Not much here yet! We're still in beta over here!
