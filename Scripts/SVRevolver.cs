@@ -63,7 +63,6 @@ public class SVRevolver : MonoBehaviour {
 	private SVGrabbable grabComponent;
 	private SVFireBullet fireBulletComponent;
 	private SVControllerInput input;
-	private Rigidbody rb;
 	private int curBullets = 6;
 
 	private SVLinearAcceleration linearAccelerationTracker;
@@ -73,7 +72,6 @@ public class SVRevolver : MonoBehaviour {
 		this.grabComponent = GetComponent<SVGrabbable> ();
 		this.fireBulletComponent = GetComponent<SVFireBullet> ();
 		this.input = this.gameObject.GetComponent<SVControllerInput> ();
-		this.rb = gameObject.GetComponent<Rigidbody> ();
 
 		linearAccelerationTracker = new SVLinearAcceleration ();
 		revolvingBarrel.revolverParent = this;
@@ -83,7 +81,7 @@ public class SVRevolver : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (input.hasActiveController) {
+		if (input.activeController != SVControllerType.SVController_None) {
 			
 			if (input.GetTriggerButtonPressed(input.activeController)) {
 				Fire();
@@ -98,7 +96,7 @@ public class SVRevolver : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		if (input.hasActiveController && input.openWithPhysics && grabComponent.inHand) {
+		if (input.activeController != SVControllerType.SVController_None && input.openWithPhysics && grabComponent.inHand) {
 			Vector3 gunAcceleration;
 			Vector3 gunVelocity = linearAccelerationTracker.LinearAcceleration (out gunAcceleration, this.transform.localPosition, 8);
 			if (gunVelocity == Vector3.zero)
@@ -108,10 +106,11 @@ public class SVRevolver : MonoBehaviour {
 			gunVelocity = this.transform.InverseTransformDirection (gunVelocity);
 			float openAcceleration = (this.curBullets == 0) ? input.openEmptyAcceleration : input.openAcceleration;
 			bool isDecelerating = !Sign(gunAcceleration.x, gunVelocity.x);
+			bool controllerInRightHand = input.activeController == SVControllerType.SVController_Right;
 			if (isDecelerating) {
-				if (Sign (gunAcceleration.x, (input.activeControllerIsRight ? openAcceleration : -openAcceleration)) && Mathf.Abs (gunAcceleration.x) > Mathf.Abs (openAcceleration)) {
-					revolvingBarrel.OpenForReload (input.activeControllerIsRight);
-				} else if (Sign (gunAcceleration.x, (input.activeControllerIsRight ? input.closeAcceleration : -input.closeAcceleration)) && Mathf.Abs (gunAcceleration.x) > Mathf.Abs (input.closeAcceleration)) {
+				if (Sign (gunAcceleration.x, (controllerInRightHand ? openAcceleration : -openAcceleration)) && Mathf.Abs (gunAcceleration.x) > Mathf.Abs (openAcceleration)) {
+					revolvingBarrel.OpenForReload (controllerInRightHand);
+				} else if (Sign (gunAcceleration.x, (controllerInRightHand ? input.closeAcceleration : -input.closeAcceleration)) && Mathf.Abs (gunAcceleration.x) > Mathf.Abs (input.closeAcceleration)) {
 					revolvingBarrel.CloseFromReload ();
 				}
 			}
@@ -149,7 +148,7 @@ public class SVRevolver : MonoBehaviour {
 		if (revolvingBarrel.isOpen) {
 			revolvingBarrel.CloseFromReload ();
 		} else {
-			revolvingBarrel.OpenForReload (input.activeControllerIsRight);
+			revolvingBarrel.OpenForReload (input.activeController == SVControllerType.SVController_Right);
 		}
 	}
 

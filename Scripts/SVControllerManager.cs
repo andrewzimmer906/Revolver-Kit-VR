@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SVControllerManager {
-	public static GameObject activeLeftController;
-	public static GameObject activeRightController;
+	public static bool leftControllerActive;
+	public static bool rightControllerActive;
 
 	public static SVGrabbable nearestGrabbableToRightController = null;
 	public static SVGrabbable nearestGrabbableToLeftController = null;

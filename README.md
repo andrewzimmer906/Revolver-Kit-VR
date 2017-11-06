@@ -1,8 +1,17 @@
+Check the online docs for the most up to date documentation.
+[Online Documentation](https://docs.google.com/document/d/1qY4gOoKnr3UV5_uPQtQFvpnfQ70VcY-oHnJr8BJIn0Y/edit?usp=sharing)
+
 ## Quickstart
 
 1. Import SteamVR - [Steam VR Plugin](https://www.assetstore.unity3d.com/en/#!/content/32647)
 2. Make sure `Virtual Reality Supported` and `OpenVR` are selected in your Project Build Settings.
 3. Open `Revolver Kit VR/Demo/Scenes` to find the demo scenes.
+
+For OpenVR Rift support please import
+
+1. [Oculus Platform SDK](https://developer.oculus.com/downloads/package/oculus-platform-sdk/)
+2. [Oculus Utilities for Unity](https://developer.oculus.com/downloads/package/oculus-utilities-for-unity-5/)
+3. [Oculus Avatar SDK](https://developer.oculus.com/downloads/package/oculus-avatar-sdk/)
 
 NOTE: 
 Revolver Kit VR currently requires the Steam VR Plugin for VR interactions.  In future version Occulus Utilities and VRTK Kit will be supported as well.

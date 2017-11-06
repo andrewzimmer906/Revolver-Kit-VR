@@ -16,13 +16,6 @@ public class SVFireBullet : MonoBehaviour {
 
 	public Transform bulletSpawnPoint;
 
-	private SVControllerInput input;
-
-	// Use this for initialization
-	void Start () {
-		this.input = this.gameObject.GetComponent<SVControllerInput> ();
-	}
-
 	public void Fire() {
 		GameObject muzzleFlash = Instantiate (muzzleFlashPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
 		muzzleFlash.transform.localScale = this.gameObject.transform.lossyScale;

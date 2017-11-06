@@ -42,7 +42,7 @@ public class SVGrabbable : MonoBehaviour {
     // Update
     //------------------------
     void Update() {
-		if (!this.input.hasActiveController) {
+		if (this.input.activeController == SVControllerType.SVController_None) {
             this.UngrabbedUpdate();
         } else {
             this.GrabbedUpdate();
@@ -53,13 +53,13 @@ public class SVGrabbable : MonoBehaviour {
 		this.inHand = false;
 
         float distanceToLeftHand = 1000;
-		if (input.LeftHandController != null) {
-			distanceToLeftHand = (this.transform.position - input.LeftHandController.transform.position).magnitude;
+		if (input.LeftControllerIsConnected) {
+			distanceToLeftHand = (this.transform.position - input.LeftControllerPosition).magnitude;
         }
 
 		float distanceToRightHand = 1000;
-		if (input.RightHandController != null) {
-			distanceToRightHand = (this.transform.position - input.RightHandController.transform.position).magnitude;
+		if (input.RightControllerIsConnected != null) {
+			distanceToRightHand = (this.transform.position - input.RightControllerPosition).magnitude;
 		}
 
         if (grabDistance > distanceToLeftHand ||
@@ -72,21 +72,21 @@ public class SVGrabbable : MonoBehaviour {
             }
 
 			// order them based on distance
-			GameObject firstController = null;
-			GameObject secondController = null;
+			SVControllerType firstController = SVControllerType.SVController_None;
+			SVControllerType secondController = SVControllerType.SVController_None;
 
 			if (distanceToLeftHand < distanceToRightHand) {
 				if (SVControllerManager.nearestGrabbableToLeftController == this)
-					firstController = input.LeftHandController;
+					firstController = SVControllerType.SVController_Left;
 				
 				if (SVControllerManager.nearestGrabbableToRightController == this)
-					secondController = input.RightHandController;	
+					secondController = SVControllerType.SVController_Right;	
 			} else {
 				if (SVControllerManager.nearestGrabbableToRightController == this)
-					firstController = input.RightHandController;
+					firstController = SVControllerType.SVController_Right;	
 
 				if (SVControllerManager.nearestGrabbableToLeftController == this)
-					secondController = input.LeftHandController;
+					secondController = SVControllerType.SVController_Left;	
 			}
 
 			TrySetActiveController (firstController);
@@ -126,11 +126,11 @@ public class SVGrabbable : MonoBehaviour {
 		float percComplete = (Time.time - this.grabStartTime) / this.grabFlyTime;
 		if (percComplete < 1 && this.shouldFly) {
 			this.inHand = false;
-			transform.position = Vector3.Lerp (this.grabStartPosition, this.input.activeController.transform.position, percComplete);
-			transform.rotation = Quaternion.Lerp (this.grabStartRotation, this.input.activeController.transform.rotation, percComplete);
+			transform.position = Vector3.Lerp (this.grabStartPosition, this.input.PositionForController(this.input.activeController), percComplete);
+			transform.rotation = Quaternion.Lerp (this.grabStartRotation, this.input.RotationForController(this.input.activeController), percComplete);
 		} else if (isKicking) {
 			this.kickOffset = Quaternion.Lerp (this.kickOffset, Quaternion.identity, 0.05f);
-			this.transform.SetPositionAndRotation (this.input.activeController.transform.position, this.input.activeController.transform.rotation * this.kickOffset);
+			this.transform.SetPositionAndRotation (this.input.PositionForController(this.input.activeController), this.input.RotationForController(this.input.activeController) * this.kickOffset);
 
 			float curAngle = Quaternion.Angle (this.kickOffset, Quaternion.identity);
 			if (curAngle < minKickAngle || Time.time - this.kickStartTime > maxKickDuration) {
@@ -138,7 +138,7 @@ public class SVGrabbable : MonoBehaviour {
 			}
 		} else {
 			this.inHand = true;
-			this.transform.SetPositionAndRotation(this.input.activeController.transform.position, this.input.activeController.transform.rotation);
+			this.transform.SetPositionAndRotation(this.input.PositionForController(this.input.activeController), this.input.RotationForController(this.input.activeController));
 		}
     }
 
@@ -156,12 +156,10 @@ public class SVGrabbable : MonoBehaviour {
     //------------------------
     // State Changes
     //------------------------
-	private void TrySetActiveController(GameObject controller) {
-		if (this.input.hasActiveController)
+	private void TrySetActiveController(SVControllerType controller) {
+		if (this.input.activeController != SVControllerType.SVController_None ||
+			controller == SVControllerType.SVController_None)
 			return;	
-
-		if (controller == null)
-			return;
 
 		if (input.gripAutoHolds) {
 			if (!input.GetGripButtonPressed(controller)) {
@@ -183,19 +181,18 @@ public class SVGrabbable : MonoBehaviour {
 			rigidbody.isKinematic = true;
 
 			// hide the controller model
-			this.input.activeRenderModel.gameObject.SetActive (false);
+			this.input.HideActiveModel();
 		}
     }
 
 	private void ClearActiveController() {
 		Rigidbody rigidbody = this.GetComponent<Rigidbody> ();
 		rigidbody.isKinematic = false;
-		rigidbody.velocity = this.input.activeControllerDevice.velocity;
-		rigidbody.angularVelocity =  this.input.activeControllerDevice.angularVelocity;
+		rigidbody.velocity = this.input.ActiveControllerVelocity ();
+		rigidbody.angularVelocity = this.input.ActiveControllerAngularVelocity ();
 
 		// Show the render model
-		this.input.activeRenderModel.gameObject.SetActive (true);
-
+		this.input.ShowActiveModel();
 		this.input.ClearActiveController ();
 	}
 }
