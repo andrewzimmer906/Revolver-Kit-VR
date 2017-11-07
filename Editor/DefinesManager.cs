@@ -47,7 +47,7 @@ public class DefineManager : EditorWindow
 		GUILayout.BeginVertical ();
 		GUILayout.Label("Revolver VR SDK", EditorStyles.boldLabel);
 
-		var text = new string[] { "VR SDK Undefined", "Steam VR (Vive / Rift)", "Open VR (Rift only)" };
+		var text = new string[] { "VR SDK Undefined", "Steam VR (Vive / Rift)", "Oculus SDK (Rift only)" };
 		selection = GUILayout.SelectionGrid(selection, text, 1, EditorStyles.radioButton);
 
 		csDefines.Clear ();

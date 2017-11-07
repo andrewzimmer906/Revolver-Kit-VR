@@ -121,7 +121,6 @@ GameObject:
   - component: {fileID: 33539268}
   - component: {fileID: 33539267}
   - component: {fileID: 33539266}
-  - component: {fileID: 33539265}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -142,86 +141,6 @@ Transform:
   m_Father: {fileID: 2118347659}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -3.74, y: -73.34, z: 0}
---- !u!82 &33539265
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 33539263}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!54 &33539266
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -248,7 +167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68c8c356fad1df6459b066c987b932da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHitSoundEffect: {fileID: 0}
+  bulletHitSoundEffect: {fileID: 8300000, guid: fd578ffb1cd8a554c92315163f8b3529,
+    type: 3}
   minPitch: 0.8
   maxPitch: 1.2
   volume: 1
@@ -360,7 +280,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3fbb1efbee33d14db4f9fdd591a5c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHitSoundEffect: {fileID: 0}
+  bulletHitSoundEffect: {fileID: 8300000, guid: 8a286920f14e8ba4c89051782e499246,
+    type: 3}
   minPitch: 0.8
   maxPitch: 1.2
   volume: 1
@@ -436,7 +357,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 126d619cf4daa52469682f85c1378b4a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.53
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 126d619cf4daa52469682f85c1378b4a, type: 2}
       propertyPath: m_LocalPosition.z
@@ -461,6 +382,10 @@ Prefab:
     - target: {fileID: 400004, guid: 126d619cf4daa52469682f85c1378b4a, type: 2}
       propertyPath: m_RootOrder
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 126d619cf4daa52469682f85c1378b4a, type: 2}
+      propertyPath: _trackingOriginType
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 126d619cf4daa52469682f85c1378b4a, type: 2}
@@ -522,7 +447,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3fbb1efbee33d14db4f9fdd591a5c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHitSoundEffect: {fileID: 0}
+  bulletHitSoundEffect: {fileID: 8300000, guid: 8a286920f14e8ba4c89051782e499246,
+    type: 3}
   minPitch: 0.8
   maxPitch: 1.2
   volume: 1
@@ -578,7 +504,6 @@ GameObject:
   - component: {fileID: 411854101}
   - component: {fileID: 411854100}
   - component: {fileID: 411854099}
-  - component: {fileID: 411854098}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -599,86 +524,6 @@ Transform:
   m_Father: {fileID: 2118347659}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &411854098
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 411854096}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!54 &411854099
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -705,7 +550,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68c8c356fad1df6459b066c987b932da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHitSoundEffect: {fileID: 0}
+  bulletHitSoundEffect: {fileID: 8300000, guid: fd578ffb1cd8a554c92315163f8b3529,
+    type: 3}
   minPitch: 0.8
   maxPitch: 1.2
   volume: 1
@@ -817,7 +663,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3fbb1efbee33d14db4f9fdd591a5c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHitSoundEffect: {fileID: 0}
+  bulletHitSoundEffect: {fileID: 8300000, guid: 8a286920f14e8ba4c89051782e499246,
+    type: 3}
   minPitch: 0.8
   maxPitch: 1.2
   volume: 1
@@ -899,6 +746,58 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114706785134319792, guid: 23c02ba891af17c41976418e91ac66c8,
+        type: 2}
+      propertyPath: gripButton
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114706785134319792, guid: 23c02ba891af17c41976418e91ac66c8,
+        type: 2}
+      propertyPath: triggerButton
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4416588210215988, guid: 23c02ba891af17c41976418e91ac66c8, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0.12278779
+      objectReference: {fileID: 0}
+    - target: {fileID: 4416588210215988, guid: 23c02ba891af17c41976418e91ac66c8, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.6963643
+      objectReference: {fileID: 0}
+    - target: {fileID: 4416588210215988, guid: 23c02ba891af17c41976418e91ac66c8, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0.12278779
+      objectReference: {fileID: 0}
+    - target: {fileID: 4416588210215988, guid: 23c02ba891af17c41976418e91ac66c8, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.6963643
+      objectReference: {fileID: 0}
+    - target: {fileID: 4416588210215988, guid: 23c02ba891af17c41976418e91ac66c8, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4416588210215988, guid: 23c02ba891af17c41976418e91ac66c8, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.015
+      objectReference: {fileID: 0}
+    - target: {fileID: 4416588210215988, guid: 23c02ba891af17c41976418e91ac66c8, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.018
+      objectReference: {fileID: 0}
+    - target: {fileID: 4416588210215988, guid: 23c02ba891af17c41976418e91ac66c8, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114706785134319792, guid: 23c02ba891af17c41976418e91ac66c8,
+        type: 2}
+      propertyPath: gripAutoHolds
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114706785134319792, guid: 23c02ba891af17c41976418e91ac66c8,
+        type: 2}
+      propertyPath: releaseGripButton
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 23c02ba891af17c41976418e91ac66c8, type: 2}
   m_IsPrefabParent: 0
@@ -915,7 +814,6 @@ GameObject:
   - component: {fileID: 614798041}
   - component: {fileID: 614798040}
   - component: {fileID: 614798039}
-  - component: {fileID: 614798038}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Untagged
@@ -936,86 +834,6 @@ Transform:
   m_Father: {fileID: 2118347659}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -3.74, y: -41.37, z: 0}
---- !u!82 &614798038
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 614798036}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!54 &614798039
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1042,7 +860,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68c8c356fad1df6459b066c987b932da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHitSoundEffect: {fileID: 0}
+  bulletHitSoundEffect: {fileID: 8300000, guid: fd578ffb1cd8a554c92315163f8b3529,
+    type: 3}
   minPitch: 0.8
   maxPitch: 1.2
   volume: 1
@@ -1236,7 +1055,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3fbb1efbee33d14db4f9fdd591a5c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHitSoundEffect: {fileID: 0}
+  bulletHitSoundEffect: {fileID: 8300000, guid: 8a286920f14e8ba4c89051782e499246,
+    type: 3}
   minPitch: 0.8
   maxPitch: 1.2
   volume: 1
@@ -1292,7 +1112,6 @@ GameObject:
   - component: {fileID: 692716677}
   - component: {fileID: 692716676}
   - component: {fileID: 692716681}
-  - component: {fileID: 692716682}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -1311,7 +1130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68c8c356fad1df6459b066c987b932da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHitSoundEffect: {fileID: 0}
+  bulletHitSoundEffect: {fileID: 8300000, guid: fd578ffb1cd8a554c92315163f8b3529,
+    type: 3}
   minPitch: 0.8
   maxPitch: 1.2
   volume: 1
@@ -1394,86 +1214,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!82 &692716682
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 692716675}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!1 &780967154
 GameObject:
   m_ObjectHideFlags: 0
@@ -1531,7 +1271,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3fbb1efbee33d14db4f9fdd591a5c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHitSoundEffect: {fileID: 0}
+  bulletHitSoundEffect: {fileID: 8300000, guid: 8a286920f14e8ba4c89051782e499246,
+    type: 3}
   minPitch: 0.8
   maxPitch: 1.2
   volume: 1
@@ -1631,7 +1372,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3fbb1efbee33d14db4f9fdd591a5c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHitSoundEffect: {fileID: 0}
+  bulletHitSoundEffect: {fileID: 8300000, guid: 8a286920f14e8ba4c89051782e499246,
+    type: 3}
   minPitch: 0.8
   maxPitch: 1.2
   volume: 1
@@ -1731,7 +1473,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3fbb1efbee33d14db4f9fdd591a5c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHitSoundEffect: {fileID: 0}
+  bulletHitSoundEffect: {fileID: 8300000, guid: 8a286920f14e8ba4c89051782e499246,
+    type: 3}
   minPitch: 0.8
   maxPitch: 1.2
   volume: 1
@@ -1831,7 +1574,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3fbb1efbee33d14db4f9fdd591a5c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHitSoundEffect: {fileID: 0}
+  bulletHitSoundEffect: {fileID: 8300000, guid: 8a286920f14e8ba4c89051782e499246,
+    type: 3}
   minPitch: 0.8
   maxPitch: 1.2
   volume: 1
@@ -1913,6 +1657,58 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114716957462688590, guid: e679e4ff2c5e5bb4da027ab41ec2e685,
+        type: 2}
+      propertyPath: gripButton
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114716957462688590, guid: e679e4ff2c5e5bb4da027ab41ec2e685,
+        type: 2}
+      propertyPath: triggerButton
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549364569289342, guid: e679e4ff2c5e5bb4da027ab41ec2e685, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0.12278779
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549364569289342, guid: e679e4ff2c5e5bb4da027ab41ec2e685, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.6963643
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549364569289342, guid: e679e4ff2c5e5bb4da027ab41ec2e685, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0.12278779
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549364569289342, guid: e679e4ff2c5e5bb4da027ab41ec2e685, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.6963643
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549364569289342, guid: e679e4ff2c5e5bb4da027ab41ec2e685, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549364569289342, guid: e679e4ff2c5e5bb4da027ab41ec2e685, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.015
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549364569289342, guid: e679e4ff2c5e5bb4da027ab41ec2e685, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.018
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549364569289342, guid: e679e4ff2c5e5bb4da027ab41ec2e685, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114716957462688590, guid: e679e4ff2c5e5bb4da027ab41ec2e685,
+        type: 2}
+      propertyPath: gripAutoHolds
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114716957462688590, guid: e679e4ff2c5e5bb4da027ab41ec2e685,
+        type: 2}
+      propertyPath: releaseGripButton
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e679e4ff2c5e5bb4da027ab41ec2e685, type: 2}
   m_IsPrefabParent: 0
@@ -1973,7 +1769,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3fbb1efbee33d14db4f9fdd591a5c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHitSoundEffect: {fileID: 0}
+  bulletHitSoundEffect: {fileID: 8300000, guid: 8a286920f14e8ba4c89051782e499246,
+    type: 3}
   minPitch: 0.8
   maxPitch: 1.2
   volume: 1
@@ -2059,7 +1856,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3fbb1efbee33d14db4f9fdd591a5c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHitSoundEffect: {fileID: 0}
+  bulletHitSoundEffect: {fileID: 8300000, guid: 8a286920f14e8ba4c89051782e499246,
+    type: 3}
   minPitch: 0.8
   maxPitch: 1.2
   volume: 1
@@ -2356,7 +2154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3fbb1efbee33d14db4f9fdd591a5c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHitSoundEffect: {fileID: 0}
+  bulletHitSoundEffect: {fileID: 8300000, guid: 8a286920f14e8ba4c89051782e499246,
+    type: 3}
   minPitch: 0.8
   maxPitch: 1.2
   volume: 1
@@ -2412,7 +2211,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 463470, guid: 84c8b8609f9bb434eaf5248f17ff1293, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.53
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 463470, guid: 84c8b8609f9bb434eaf5248f17ff1293, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2480,6 +2279,58 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114736885347063616, guid: 0016527aff1d95144ad9934a87a22768,
+        type: 2}
+      propertyPath: gripButton
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114736885347063616, guid: 0016527aff1d95144ad9934a87a22768,
+        type: 2}
+      propertyPath: triggerButton
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4442924771686878, guid: 0016527aff1d95144ad9934a87a22768, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0.12278779
+      objectReference: {fileID: 0}
+    - target: {fileID: 4442924771686878, guid: 0016527aff1d95144ad9934a87a22768, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.6963643
+      objectReference: {fileID: 0}
+    - target: {fileID: 4442924771686878, guid: 0016527aff1d95144ad9934a87a22768, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0.12278779
+      objectReference: {fileID: 0}
+    - target: {fileID: 4442924771686878, guid: 0016527aff1d95144ad9934a87a22768, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.6963643
+      objectReference: {fileID: 0}
+    - target: {fileID: 4442924771686878, guid: 0016527aff1d95144ad9934a87a22768, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4442924771686878, guid: 0016527aff1d95144ad9934a87a22768, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.015
+      objectReference: {fileID: 0}
+    - target: {fileID: 4442924771686878, guid: 0016527aff1d95144ad9934a87a22768, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.018
+      objectReference: {fileID: 0}
+    - target: {fileID: 4442924771686878, guid: 0016527aff1d95144ad9934a87a22768, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114736885347063616, guid: 0016527aff1d95144ad9934a87a22768,
+        type: 2}
+      propertyPath: gripAutoHolds
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114736885347063616, guid: 0016527aff1d95144ad9934a87a22768,
+        type: 2}
+      propertyPath: releaseGripButton
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0016527aff1d95144ad9934a87a22768, type: 2}
   m_IsPrefabParent: 0
@@ -2540,7 +2391,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3fbb1efbee33d14db4f9fdd591a5c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHitSoundEffect: {fileID: 0}
+  bulletHitSoundEffect: {fileID: 8300000, guid: 8a286920f14e8ba4c89051782e499246,
+    type: 3}
   minPitch: 0.8
   maxPitch: 1.2
   volume: 1
@@ -2640,7 +2492,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3fbb1efbee33d14db4f9fdd591a5c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHitSoundEffect: {fileID: 0}
+  bulletHitSoundEffect: {fileID: 8300000, guid: 8a286920f14e8ba4c89051782e499246,
+    type: 3}
   minPitch: 0.8
   maxPitch: 1.2
   volume: 1
@@ -2740,7 +2593,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3fbb1efbee33d14db4f9fdd591a5c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHitSoundEffect: {fileID: 0}
+  bulletHitSoundEffect: {fileID: 8300000, guid: 8a286920f14e8ba4c89051782e499246,
+    type: 3}
   minPitch: 0.8
   maxPitch: 1.2
   volume: 1

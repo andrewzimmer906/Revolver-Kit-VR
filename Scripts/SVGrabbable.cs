@@ -58,7 +58,7 @@ public class SVGrabbable : MonoBehaviour {
         }
 
 		float distanceToRightHand = 1000;
-		if (input.RightControllerIsConnected != null) {
+		if (input.RightControllerIsConnected) {
 			distanceToRightHand = (this.transform.position - input.RightControllerPosition).magnitude;
 		}
 

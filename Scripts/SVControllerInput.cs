@@ -1,6 +1,4 @@
-﻿#define USES_STEAM_VR
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -11,35 +9,20 @@ public enum SVControllerType {
 	SVController_Right
 };
 
-#if USES_STEAM_VR
-public enum SVInputButton {
-SVButton_None = -1,
-SVButton_System = Valve.VR.EVRButtonId.k_EButton_System,
-SVButton_Menu = Valve.VR.EVRButtonId.k_EButton_ApplicationMenu,
-SVButton_Grip = Valve.VR.EVRButtonId.k_EButton_Grip,
-SVButton_DPad_Left = Valve.VR.EVRButtonId.k_EButton_DPad_Left,
-SVButton_DPad_Right = Valve.VR.EVRButtonId.k_EButton_DPad_Right,
-SVButton_DPad_Down = Valve.VR.EVRButtonId.k_EButton_DPad_Down,
-SVButton_DPad_Up = Valve.VR.EVRButtonId.k_EButton_DPad_Up,
-SVButton_A = Valve.VR.EVRButtonId.k_EButton_A,
-SVButton_Touchpad = Valve.VR.EVRButtonId.k_EButton_SteamVR_Touchpad,
-SVButton_Trigger = Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger
-};
-#else
 public enum SVInputButton {
 	SVButton_None = -1,
-	SVButton_System = 0,
+	SVButton_A  = 0,
+	SVButton_B,
+	SVButton_System,
 	SVButton_Menu,
-	SVButton_Grip,
-	SVButton_DPad_Left,
-	SVButton_DPad_Right,
-	SVButton_DPad_Down,
-	SVButton_DPad_Up,
-	SVButton_A,
-	SVButton_Touchpad,
+	SVButton_Thumbstick_Press,
 	SVButton_Trigger,
+	SVButton_Grip,
+	SVButton_Thumbstick_Left,
+	SVButton_Thumbstick_Right,
+	SVButton_Thumbstick_Down,
+	SVButton_Thumbstick_Up
 };
-#endif
 
 public class SVControllerInput : MonoBehaviour {
 
@@ -78,9 +61,13 @@ public class SVControllerInput : MonoBehaviour {
 	[HideInInspector]
 	public SteamVR_RenderModel activeRenderModel;
 	private SteamVR_ControllerManager controllerManager;
+	#elif USES_OPEN_VR
+	private OVRManager controllerManager;
+	private Dictionary<int, bool>buttonStateLeft;
+	private Dictionary<int, bool>buttonStateRight;
+	OVRHapticsClip clipHard;
 	#endif
 
-	private float rumbleStrength = 1f;
 
 	//------------------------
 	// Setup
@@ -89,6 +76,19 @@ public class SVControllerInput : MonoBehaviour {
 		#if USES_STEAM_VR
 		controllerManager = Object.FindObjectOfType<SteamVR_ControllerManager> ();
 		Assert.IsNotNull (controllerManager, "SVControllerInput (with SteamVR) Needs a SteamVR_ControllerManager in the scene to function correctly.");
+		#elif USES_OPEN_VR
+		controllerManager = Object.FindObjectOfType<OVRManager> ();
+		Assert.IsNotNull (controllerManager, "SVControllerInput (with Open VR) Needs a OVRManager in the scene to function correctly.");
+
+		buttonStateLeft = new Dictionary<int, bool>();
+		buttonStateRight = new Dictionary<int, bool>();
+
+		int cnt = 10;
+		clipHard = new OVRHapticsClip(cnt);
+		for (int i = 0; i < cnt; i++) {
+			clipHard.Samples[i] = i % 2 == 0 ? (byte)0 : (byte)180;
+		}
+		clipHard = new OVRHapticsClip(clipHard.Samples, clipHard.Samples.Length);
 		#endif
 	}
 
@@ -112,7 +112,7 @@ public class SVControllerInput : MonoBehaviour {
 			return (controllerManager.left != null &&
 			controllerManager.left.activeInHierarchy);
 #elif USES_OPEN_VR
-			return (OVRInput.GetConnectedControllers() & OVRInput.Controller.LTouch);
+			return ((OVRInput.GetConnectedControllers() & OVRInput.Controller.LTouch) == OVRInput.Controller.LTouch);
 #endif
 		}
 	}
@@ -123,7 +123,7 @@ public class SVControllerInput : MonoBehaviour {
 			return (controllerManager.right != null &&
 			controllerManager.right.activeInHierarchy);
 #elif USES_OPEN_VR
-			return (OVRInput.GetConnectedControllers() & OVRInput.Controller.RTouch);
+			return ((OVRInput.GetConnectedControllers() & OVRInput.Controller.RTouch) == OVRInput.Controller.RTouch);
 #endif
 		}
 	}
@@ -134,24 +134,27 @@ public class SVControllerInput : MonoBehaviour {
 			if (this.LeftControllerIsConnected) {
 				return controllerManager.left.transform.position;
 			}
-			#elif USES_OPEN_VR
-			OVRInput.GetLocalControllerPosition(OVRInput.Controller.LTouch);
-			#endif
 			return Vector3.negativeInfinity;
+			#elif USES_OPEN_VR
+			return OVRInput.GetLocalControllerPosition(OVRInput.Controller.LTouch);
+			#else
+			return Vector3.negativeInfinity;
+			#endif
 		}
 	}
 
 	public Vector3 RightControllerPosition {
 		get {
-			
 			#if USES_STEAM_VR
 			if (this.RightControllerIsConnected) {
 				return controllerManager.right.transform.position;
 			}
+			return Vector3.negativeInfinity;	
 			#elif USES_OPEN_VR
-			OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTouch);
-			#endif
+			return OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTouch);
+			#else
 			return Vector3.negativeInfinity;
+			#endif
 		}
 	}
 
@@ -161,7 +164,7 @@ public class SVControllerInput : MonoBehaviour {
 				#if USES_STEAM_VR
 				return controllerManager.left.transform.rotation;
 				#elif USES_OPEN_VR
-				OVRInput.GetLocalControllerPosition(OVRInput.Controller.LTouch);
+				return OVRInput.GetLocalControllerRotation(OVRInput.Controller.LTouch);
 				#endif
 			}
 
@@ -175,7 +178,7 @@ public class SVControllerInput : MonoBehaviour {
 				#if USES_STEAM_VR
 				return controllerManager.right.transform.rotation;
 				#elif USES_OPEN_VR
-				OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTouch);
+				return OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTouch);
 				#endif
 			}
 
@@ -253,7 +256,9 @@ public class SVControllerInput : MonoBehaviour {
 			return false;
 		
 		#if USES_STEAM_VR
-		return Controller(controller).GetPress((Valve.VR.EVRButtonId)button);
+		return Controller(controller).GetPress(GetSteamButtonMapping(button));
+		#elif USES_OPEN_VR
+		return GetOVRButtonDown(controller, button);
 		#else
 		return false;
 		#endif
@@ -264,7 +269,9 @@ public class SVControllerInput : MonoBehaviour {
 			return false;
 		
 		#if USES_STEAM_VR
-		return Controller(controller).GetPressDown((Valve.VR.EVRButtonId)button);
+		return Controller(controller).GetPressDown(GetSteamButtonMapping(button));
+		#elif USES_OPEN_VR
+		return GetOVRButtonPressDown(controller, button);
 		#else
 		return false;
 		#endif
@@ -315,25 +322,40 @@ public class SVControllerInput : MonoBehaviour {
 	public void RumbleActiveController(float rumbleLength) {
 		#if USES_STEAM_VR
 		if (activeControllerDevice != null) {
-			StartCoroutine( LongVibration(activeControllerDevice, rumbleLength, rumbleStrength) );
+			StartCoroutine( LongVibration(activeControllerDevice, rumbleLength, 1.0f) );
 		}
 		#endif
+		StartCoroutine( OVRVibrateForTime(rumbleLength) );
 	}
 
 	public Vector3 ActiveControllerVelocity() {
 		#if USES_STEAM_VR
 		return this.activeControllerDevice.velocity;
-		#endif
-
+		#elif USES_OPEN_VR
+		if (activeController == SVControllerType.SVController_Left) {
+			return OVRInput.GetLocalControllerVelocity(OVRInput.Controller.LTouch);
+		} else if (activeController == SVControllerType.SVController_Right) {
+			return OVRInput.GetLocalControllerVelocity(OVRInput.Controller.RTouch);
+		}
 		return Vector3.zero;
+		#else
+		return Vector3.zero;
+		#endif
 	}
 
 	public Vector3 ActiveControllerAngularVelocity() {
 		#if USES_STEAM_VR
 		return this.activeControllerDevice.angularVelocity;
-		#endif
-
+		#elif USES_OPEN_VR
+		if (activeController == SVControllerType.SVController_Left) {
+			return OVRInput.GetLocalControllerAngularVelocity(OVRInput.Controller.LTouch);
+		} else if (activeController == SVControllerType.SVController_Right) {
+			return OVRInput.GetLocalControllerAngularVelocity(OVRInput.Controller.RTouch);
+		}
 		return Vector3.zero;
+		#else
+		return Vector3.zero;
+		#endif
 	}
 
 	//------------------------
@@ -376,5 +398,145 @@ public class SVControllerInput : MonoBehaviour {
 			yield return StartCoroutine(LongVibration(device, vibrationLength, strength));
 		}
 	}
+	#endif
+
+	#if USES_OPEN_VR
+	public IEnumerator OVRVibrateForTime(float time)
+	{
+		OVRHaptics.OVRHapticsChannel channel;
+		if (activeController == SVControllerType.SVController_Left) {
+			channel = OVRHaptics.LeftChannel;
+		} else {
+			channel = OVRHaptics.RightChannel;
+		}
+
+		for (float t = 0; t <= time; t += Time.deltaTime) {
+			channel.Queue(clipHard);
+		}
+		
+		yield return new WaitForSeconds(time);
+		channel.Clear();
+		yield return null;
+	}
+	#endif
+	//------------------------
+	// Steam Mappings
+	//------------------------
+	#if USES_STEAM_VR
+
+	private Valve.VR.EVRButtonId GetSteamButtonMapping(SVInputButton button) {
+		switch (button) {
+			case SVInputButton.SVButton_A:
+			return Valve.VR.EVRButtonId.k_EButton_A;
+			case SVInputButton.SVButton_B:
+			return Valve.VR.EVRButtonId.k_EButton_A;
+			case SVInputButton.SVButton_Grip:
+			return Valve.VR.EVRButtonId.k_EButton_Grip;
+			case SVInputButton.SVButton_Menu:
+			return Valve.VR.EVRButtonId.k_EButton_ApplicationMenu;
+			case SVInputButton.SVButton_System:
+			return Valve.VR.EVRButtonId.k_EButton_System;
+			case SVInputButton.SVButton_Trigger:
+			return Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger;
+			case SVInputButton.SVButton_Thumbstick_Down:
+			return Valve.VR.EVRButtonId.k_EButton_DPad_Down;
+			case SVInputButton.SVButton_Thumbstick_Left:
+			return Valve.VR.EVRButtonId.k_EButton_DPad_Left;
+			case SVInputButton.SVButton_Thumbstick_Right:
+			return Valve.VR.EVRButtonId.k_EButton_DPad_Right;
+			case SVInputButton.SVButton_Thumbstick_Up:
+			return Valve.VR.EVRButtonId.k_EButton_DPad_Up;
+			case SVInputButton.SVButton_Thumbstick_Press:
+			return Valve.VR.EVRButtonId.k_EButton_SteamVR_Touchpad;
+		}
+		return (Valve.VR.EVRButtonId)0;
+	}
+	#endif
+
+
+
+	#if USES_OPEN_VR
+	//------------------------
+	// OVR Mappings
+	//------------------------
+	private OVRInput.Button GetOVRButtonMapping(SVInputButton button) {
+		switch (button) {
+		case SVInputButton.SVButton_A:
+			return OVRInput.Button.One;
+		case SVInputButton.SVButton_B:
+			return OVRInput.Button.Two;
+		case SVInputButton.SVButton_System:
+			return OVRInput.Button.Start;
+		case SVInputButton.SVButton_Thumbstick_Press:
+			return OVRInput.Button.PrimaryThumbstick;
+		}
+
+		return (OVRInput.Button)0;
+	}
+
+	private bool GetOVRButtonPressDown(SVControllerType controller, SVInputButton button) {
+		bool isRight = (controller == SVControllerType.SVController_Right);
+		Dictionary<int, bool> buttonState = isRight ? this.buttonStateRight : this.buttonStateLeft;
+		OVRInput.Controller ovrController = (isRight ? OVRInput.Controller.RTouch : OVRInput.Controller.LTouch);
+
+		bool isDown = GetOVRButtonDown (controller, button);
+		bool inputIsDown = buttonState.ContainsKey ((int)button) && (bool)buttonState [(int)button];
+		bool isPressDown = (!inputIsDown && isDown);
+		buttonState [(int)button] = isDown;
+		return isPressDown;
+	}
+
+	private bool GetOVRButtonDown(SVControllerType controller, SVInputButton button) {
+		bool isRight = (controller == SVControllerType.SVController_Right);
+		OVRInput.Controller ovrController = (isRight ? OVRInput.Controller.RTouch : OVRInput.Controller.LTouch);
+
+		switch (button) {
+		// Buttons
+		case SVInputButton.SVButton_A:
+		case SVInputButton.SVButton_System:
+		case SVInputButton.SVButton_Thumbstick_Press:
+			return OVRInput.Get (GetOVRButtonMapping(button), ovrController);
+
+		// 2D Axis
+		case SVInputButton.SVButton_Thumbstick_Down:
+		case SVInputButton.SVButton_Thumbstick_Left:
+		case SVInputButton.SVButton_Thumbstick_Right:
+		case SVInputButton.SVButton_Thumbstick_Up:
+			{
+				OVRInput.Axis2D axis2D = OVRInput.Axis2D.PrimaryThumbstick;
+
+				Vector2 vec = OVRInput.Get (axis2D, ovrController);
+
+				if (button == SVInputButton.SVButton_Thumbstick_Down) {
+					return vec.y < -0.75;
+				} else if (button == SVInputButton.SVButton_Thumbstick_Up) {
+					return vec.y > 0.75;
+				} else if (button == SVInputButton.SVButton_Thumbstick_Left) {
+					return vec.x < -0.75;
+				} else if (button == SVInputButton.SVButton_Thumbstick_Right) {
+					return vec.x > 0.75;
+				}
+				return false;
+			}
+
+		// 1D Axis
+		case SVInputButton.SVButton_Trigger:
+		case SVInputButton.SVButton_Grip:
+			{
+				OVRInput.Axis1D axis = OVRInput.Axis1D.PrimaryIndexTrigger;
+				if (button == SVInputButton.SVButton_Trigger) {
+					axis = OVRInput.Axis1D.PrimaryIndexTrigger;
+				} else if (button == SVInputButton.SVButton_Grip) {
+					axis = OVRInput.Axis1D.PrimaryHandTrigger;
+				}
+				return (OVRInput.Get (axis, ovrController) > 0.75f);
+			}
+
+		default:
+			return false;	
+		}
+			
+	}
+
 	#endif
 }

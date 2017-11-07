@@ -19,7 +19,6 @@ public class SVTargetDemo : SVShootable {
 
 	public override void Hit(RaycastHit hit, SVBullet bullet, Vector3 rayDirection) {
 		base.Hit (hit, bullet, rayDirection);
-		print ("target hit");
 
 		if (!isRotating) {
 			StartCoroutine (AnimateTargetTo (this.transform.localRotation * upRotation));
