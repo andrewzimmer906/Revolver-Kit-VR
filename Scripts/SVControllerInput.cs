@@ -419,6 +419,8 @@ public class SVControllerInput : MonoBehaviour {
 		yield return null;
 	}
 	#endif
+
+
 	//------------------------
 	// Steam Mappings
 	//------------------------
@@ -454,11 +456,11 @@ public class SVControllerInput : MonoBehaviour {
 	#endif
 
 
-
-	#if USES_OPEN_VR
 	//------------------------
 	// OVR Mappings
 	//------------------------
+	#if USES_OPEN_VR
+
 	private OVRInput.Button GetOVRButtonMapping(SVInputButton button) {
 		switch (button) {
 		case SVInputButton.SVButton_A:
@@ -477,7 +479,6 @@ public class SVControllerInput : MonoBehaviour {
 	private bool GetOVRButtonPressDown(SVControllerType controller, SVInputButton button) {
 		bool isRight = (controller == SVControllerType.SVController_Right);
 		Dictionary<int, bool> buttonState = isRight ? this.buttonStateRight : this.buttonStateLeft;
-		OVRInput.Controller ovrController = (isRight ? OVRInput.Controller.RTouch : OVRInput.Controller.LTouch);
 
 		bool isDown = GetOVRButtonDown (controller, button);
 		bool inputIsDown = buttonState.ContainsKey ((int)button) && (bool)buttonState [(int)button];
@@ -493,6 +494,7 @@ public class SVControllerInput : MonoBehaviour {
 		switch (button) {
 		// Buttons
 		case SVInputButton.SVButton_A:
+		case SVInputButton.SVButton_B:
 		case SVInputButton.SVButton_System:
 		case SVInputButton.SVButton_Thumbstick_Press:
 			return OVRInput.Get (GetOVRButtonMapping(button), ovrController);
