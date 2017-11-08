@@ -89,6 +89,8 @@ public class SVControllerInput : MonoBehaviour {
 			clipHard.Samples[i] = i % 2 == 0 ? (byte)0 : (byte)180;
 		}
 		clipHard = new OVRHapticsClip(clipHard.Samples, clipHard.Samples.Length);
+		#else
+		Debug.LogError("Revolver Kit VR requires you to choose either Steam VR or Oculus SDK as your VR platform. Please open \"Window -> Revolver VR SDK\" and select your framework.");
 		#endif
 	}
 
@@ -113,6 +115,8 @@ public class SVControllerInput : MonoBehaviour {
 			controllerManager.left.activeInHierarchy);
 #elif USES_OPEN_VR
 			return ((OVRInput.GetConnectedControllers() & OVRInput.Controller.LTouch) == OVRInput.Controller.LTouch);
+#else
+			return false;
 #endif
 		}
 	}
@@ -124,6 +128,8 @@ public class SVControllerInput : MonoBehaviour {
 			controllerManager.right.activeInHierarchy);
 #elif USES_OPEN_VR
 			return ((OVRInput.GetConnectedControllers() & OVRInput.Controller.RTouch) == OVRInput.Controller.RTouch);
+#else
+			return false;
 #endif
 		}
 	}
@@ -134,11 +140,11 @@ public class SVControllerInput : MonoBehaviour {
 			if (this.LeftControllerIsConnected) {
 				return controllerManager.left.transform.position;
 			}
-			return Vector3.negativeInfinity;
+			return Vector3.zero;
 			#elif USES_OPEN_VR
 			return OVRInput.GetLocalControllerPosition(OVRInput.Controller.LTouch);
 			#else
-			return Vector3.negativeInfinity;
+			return Vector3.zero;
 			#endif
 		}
 	}
@@ -149,11 +155,11 @@ public class SVControllerInput : MonoBehaviour {
 			if (this.RightControllerIsConnected) {
 				return controllerManager.right.transform.position;
 			}
-			return Vector3.negativeInfinity;	
+			return Vector3.zero;	
 			#elif USES_OPEN_VR
 			return OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTouch);
 			#else
-			return Vector3.negativeInfinity;
+			return Vector3.zero;
 			#endif
 		}
 	}
@@ -196,7 +202,7 @@ public class SVControllerInput : MonoBehaviour {
 			return RightControllerPosition;
 		}
 
-		return Vector3.negativeInfinity;
+		return Vector3.zero;
 	}
 
 	public Quaternion RotationForController(SVControllerType controller) {
@@ -324,8 +330,9 @@ public class SVControllerInput : MonoBehaviour {
 		if (activeControllerDevice != null) {
 			StartCoroutine( LongVibration(activeControllerDevice, rumbleLength, 1.0f) );
 		}
-		#endif
+		#elif USES_OPEN_VR
 		StartCoroutine( OVRVibrateForTime(rumbleLength) );
+		#endif
 	}
 
 	public Vector3 ActiveControllerVelocity() {
